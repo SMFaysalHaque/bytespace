@@ -21,6 +21,14 @@
   --font-heading: var(--font-poppins);
   --font-body: var(--font-satoshi);
   --font-display: var(--font-clash-display);
+
+  --animate-marquee: marquee 35s linear infinite;
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
 }
 
 html {
