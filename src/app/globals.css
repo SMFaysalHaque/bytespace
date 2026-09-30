@@ -20,6 +20,7 @@
   --font-sans: var(--font-satoshi);
   --font-heading: var(--font-poppins);
   --font-body: var(--font-satoshi);
+  --font-display: var(--font-clash-display);
 }
 
 html {

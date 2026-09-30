@@ -5,4 +5,10 @@ export { growthStats } from "./stats";
 export { testimonials } from "./testimonials";
 export { partners } from "./partners";
 export { createManageFeatures } from "./features";
-export { footerColumns, socialLinks } from "./footer";
+export {
+  footerDescription,
+  footerDisclaimer,
+  footerCopyright,
+  footerLinkGroups,
+  footerLegalLinks,
+} from "./footer";
