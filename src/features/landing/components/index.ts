@@ -1,2 +1,16 @@
 export { Hero } from "./hero";
 export { Partners } from "./partners";
+export { DiscoverPassion } from "./discover-passion";
+export { CourseFilters } from "./course-filters";
+export { CourseCard } from "./course-card";
+export { CoursesGrid } from "./courses-grid";
+export { ExploreLearningPaths } from "./explore-learning-paths";
+export { CategoryCard } from "./category-card";
+export { CategoryGrid } from "./category-grid";
+export { ProfessionalGrowth } from "./professional-growth";
+export { CreateManageCourses } from "./create-manage-courses";
+export { CreatorCta } from "./creator-cta";
+export { CommunityTestimonials } from "./community-testimonials";
+export { TestimonialCard } from "./testimonial-card";
+export { LearningProgressCard } from "./learning-progress-card";
+export { HappyStudentsCard } from "./happy-students-card";

@@ -2,6 +2,8 @@ import Image from "next/image";
 import { Container } from "@/components/shared";
 import { fonts } from "@/config/fonts";
 import { cn } from "@/lib/utils";
+import { HappyStudentsCard } from "./happy-students-card";
+import { LearningProgressCard } from "./learning-progress-card";
 
 const personShadow =
   "drop-shadow(0 24px 24px rgba(0,0,0,0.09)) drop-shadow(0 73px 72px rgba(0,0,0,0.13))";
@@ -14,8 +16,6 @@ const ornaments = [
   { src: "/images/hero/coil-white-r.png", left: 1292, top: 837, w: 317, h: 332, flip: false },
   { src: "/images/hero/cone-white-l.png", left: 189, top: 853, w: 346, h: 343, flip: false },
 ];
-
-const avatars = [1, 2, 3, 4, 5, 6, 7];
 
 const cardClass = "rounded-2xl bg-white shadow-xl";
 
@@ -42,50 +42,6 @@ function SearchBar({ className }: { className?: string }) {
       >
         Search
       </button>
-    </div>
-  );
-}
-
-function LearningProgressCard() {
-  return (
-    <div className={cn(cardClass, "flex flex-col gap-2 p-4")}>
-      <p className="text-ink text-sm font-medium">Learning Progress</p>
-      <p className={cn(fonts.heading.className, "text-ink text-5xl font-semibold tracking-tight")}>
-        55%
-      </p>
-      <div className="relative h-2 w-50 rounded-full bg-[#f6f6f6]">
-        <div className="bg-accent absolute inset-y-0 left-0 w-28 rounded-full" />
-      </div>
-    </div>
-  );
-}
-
-function HappyStudentsCard() {
-  return (
-    <div className={cn(cardClass, "flex w-64.5 flex-col gap-2 p-4")}>
-      <div className="flex flex-col">
-        <p className="text-ink text-base font-medium">Happy Students</p>
-        <div className="flex items-center gap-1">
-          <p className="text-xs">
-            <span className="text-ink">4.5 </span>
-            <span className="text-muted">(240)</span>
-          </p>
-          <Image src="/images/icons/star.svg" alt="" width={13} height={13} className="size-3.5" />
-        </div>
-      </div>
-      <div className="flex items-center -space-x-4">
-        {avatars.map((n) => (
-          <span
-            key={n}
-            className="relative size-10.75 shrink-0 overflow-hidden rounded-full ring-2 ring-white"
-          >
-            <Image src={`/images/hero/avatars/a${n}.png`} alt="" fill className="object-cover" />
-          </span>
-        ))}
-        <span className="bg-accent text-ink relative flex size-10.75 shrink-0 items-center justify-center rounded-full text-xs font-bold ring-2 ring-white">
-          2K+
-        </span>
-      </div>
     </div>
   );
 }
