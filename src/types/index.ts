@@ -7,7 +7,6 @@ export interface Category {
   id: string;
   name: string;
   icon: string;
-  courseCount: number;
 }
 
 export interface Course {
@@ -15,13 +14,13 @@ export interface Course {
   title: string;
   category: string;
   thumbnail: string;
-  author: string;
-  authorAvatar: string;
-  rating: number;
-  reviewCount: number;
-  price: number;
+  studio: string;
   lessons: number;
   duration: string;
+  comments: number;
+  level: string;
+  price: number;
+  rating: number;
 }
 
 export interface Stat {

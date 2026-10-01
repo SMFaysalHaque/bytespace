@@ -19,9 +19,16 @@ const satoshi = localFont({
   display: "swap",
 });
 
+const clashDisplay = localFont({
+  src: [{ path: "../assets/fonts/ClashDisplay-Bold.woff2", weight: "700", style: "normal" }],
+  variable: "--font-clash-display",
+  display: "swap",
+});
+
 export const fonts = {
   heading: poppins,
   body: satoshi,
+  display: clashDisplay,
 };
 
-export const fontVariables = `${poppins.variable} ${satoshi.variable}`;
+export const fontVariables = `${poppins.variable} ${satoshi.variable} ${clashDisplay.variable}`;

@@ -1,38 +1,39 @@
-import type { FooterColumn, NavLink } from "@/types";
+import type { NavLink } from "@/types";
 
-export const footerColumns: FooterColumn[] = [
-  {
-    title: "Company",
-    links: [
-      { label: "About Us", href: "/about" },
-      { label: "Careers", href: "/careers" },
-      { label: "Press", href: "/press" },
-      { label: "Blog", href: "/blog" },
-    ],
-  },
-  {
-    title: "Community",
-    links: [
-      { label: "Instructors", href: "/instructors" },
-      { label: "Students", href: "/students" },
-      { label: "Partners", href: "/partners" },
-      { label: "Events", href: "/events" },
-    ],
-  },
-  {
-    title: "Support",
-    links: [
-      { label: "Help Center", href: "/help" },
-      { label: "Contact", href: "/contact" },
-      { label: "Privacy Policy", href: "/privacy" },
-      { label: "Terms of Service", href: "/terms" },
-    ],
-  },
+export const footerDescription =
+  "Stay Up to date with our latest features and releases by joining our newsletter.";
+
+export const footerDisclaimer =
+  "By subscribing, you agree to our Privacy Policy and consent to receive updates from our company.";
+
+export const footerCopyright = "@ 2023 ByteSpace. All rights reserved.";
+
+export const footerLinkGroups: NavLink[][] = [
+  [
+    { label: "Featured Courses", href: "#" },
+    { label: "Featured Categories", href: "#" },
+    { label: "Business", href: "#" },
+    { label: "IT", href: "#" },
+    { label: "Design", href: "#" },
+  ],
+  [
+    { label: "Development", href: "#" },
+    { label: "Marketing", href: "#" },
+    { label: "Photography", href: "#" },
+    { label: "Finance", href: "#" },
+    { label: "Sport", href: "#" },
+  ],
+  [
+    { label: "Become a Creator", href: "#" },
+    { label: "Affiliate Program", href: "#" },
+    { label: "Contact", href: "#" },
+    { label: "Help", href: "#" },
+    { label: "About", href: "#" },
+  ],
 ];
 
-export const socialLinks: NavLink[] = [
-  { label: "Facebook", href: "https://facebook.com" },
-  { label: "Twitter", href: "https://twitter.com" },
-  { label: "Instagram", href: "https://instagram.com" },
-  { label: "LinkedIn", href: "https://linkedin.com" },
+export const footerLegalLinks: NavLink[] = [
+  { label: "Privacy Policy", href: "#" },
+  { label: "Terms of Service", href: "#" },
+  { label: "Cookies Settings", href: "#" },
 ];

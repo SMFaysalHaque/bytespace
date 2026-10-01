@@ -3,12 +3,10 @@ import type { NavLink } from "@/types";
 export const mainNav: NavLink[] = [
   { label: "Home", href: "/" },
   { label: "Courses", href: "/courses" },
-  { label: "About", href: "/about" },
-  { label: "Pricing", href: "/pricing" },
-  { label: "Contact", href: "/contact" },
+  { label: "Creators", href: "/creators" },
 ];
 
 export const authNav = {
-  login: { label: "Log In", href: "/login" },
-  signup: { label: "Sign Up", href: "/signup" },
+  login: { label: "Sign In", href: "/login" },
+  signup: { label: "Join Us", href: "/signup" },
 };
