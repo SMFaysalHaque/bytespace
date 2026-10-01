@@ -6,10 +6,11 @@ import { cn } from "@/lib/utils";
 
 interface LogoProps {
   tone?: "light" | "dark";
+  markOnly?: boolean;
   className?: string;
 }
 
-export function Logo({ tone = "dark", className }: LogoProps) {
+export function Logo({ tone = "dark", markOnly = false, className }: LogoProps) {
   return (
     <Link
       href="/"
@@ -24,15 +25,17 @@ export function Logo({ tone = "dark", className }: LogoProps) {
         priority
         className="h-[31.5px] w-[28.875px]"
       />
-      <span
-        className={cn(
-          fonts.display.className,
-          "text-2xl leading-none font-bold",
-          tone === "light" ? "text-surface" : "text-ink",
-        )}
-      >
-        {siteConfig.name}
-      </span>
+      {!markOnly && (
+        <span
+          className={cn(
+            fonts.display.className,
+            "text-2xl leading-none font-bold",
+            tone === "light" ? "text-surface" : "text-ink",
+          )}
+        >
+          {siteConfig.name}
+        </span>
+      )}
     </Link>
   );
 }

@@ -101,6 +101,28 @@ From the Figma landing frame, in order:
 
 ## 5. Status — What's Done
 
+### Auth: Sign In + Sign Up ✅ (branch `auth`)
+
+- Route groups: existing routes moved into `src/app/(site)/` (keeps Navbar + Footer);
+  auth pages live in `src/app/(auth)/{login,signup}` with no global chrome. URLs unchanged
+  (`/`, `/courses`, `/search`, `/creators`, `/login`, `/signup`). Root layout now only
+  renders `<AuthProvider>`.
+- `AuthProvider` (`src/providers/auth-provider.tsx`): `useSyncExternalStore` over
+  `localStorage` (key `bytespace.auth`), static credential in `src/data/auth.ts`
+  (`demo@bytespace.com` / `Demo@12345`). `login` validates and errors on mismatch; `signup`
+  logs in with the entered name; `logout` clears. Hook: `src/features/auth/hooks/use-auth.ts`.
+- Components (`src/features/auth/components/`): `auth-layout` (blue grid, mark-only logo,
+  marketing panel, form card), `auth-decoration` (reuses `CourseCard` + `HappyStudentsCard`
+  + lime torus/triangle + white coil, xl+ only), `auth-field`, `signin-form`, `signup-form`.
+  Lightweight validation (email/password), no new deps. Social buttons are visual only.
+- Navbar now shows an avatar + Logout dropdown when authenticated (desktop and mobile);
+  logged-in users hitting `/login` or `/signup` are redirected home.
+- Assets: `public/images/auth/{torus-lime,triangle-lime}.png` (tinted from Figma exports),
+  `public/images/icons/{facebook,google}.svg`; reuses hero grid + coil + course data.
+- Verified across xs/lg/xxl (no overflow), full flow exercised (wrong password → error,
+  login → redirect + avatar, persistence across reload, logout). `tsc` + `eslint` clean.
+- Commit message: `feat: add sign in and sign up pages with auth provider and route groups`
+
 ### Course Details page ✅ (branch `courseDetails`)
 
 - Route `/courses` (`src/app/courses/page.tsx`), wiring the existing navbar "Courses" link.

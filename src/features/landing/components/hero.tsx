@@ -22,24 +22,24 @@ const cardClass = "rounded-2xl bg-white shadow-xl";
 
 function SearchBar({ className }: { className?: string }) {
   return (
-    <div className={cn("flex items-start gap-4", className)}>
-      <div className="flex h-13 w-full items-center gap-2 rounded-3xl bg-white px-6 sm:w-115.25">
+    <div className={cn("flex items-start gap-3 sm:gap-4", className)}>
+      <div className="flex h-11 min-w-0 flex-1 items-center gap-2 rounded-3xl bg-white px-4 sm:h-12 sm:px-6 lg:h-13 lg:w-115.25 lg:flex-none">
         <Image
           src="/images/icons/search.svg"
           alt=""
           width={24}
           height={24}
-          className="size-6 shrink-0"
+          className="size-5 shrink-0 sm:size-6"
         />
         <input
           type="text"
           placeholder="Course, topic, creator"
-          className="text-ink placeholder:text-muted w-full bg-transparent text-lg outline-none"
+          className="text-ink placeholder:text-muted w-full min-w-0 bg-transparent text-base outline-none lg:text-lg"
         />
       </div>
       <Link
         href="/search"
-        className="bg-accent text-ink hover:bg-accent-bright inline-flex items-center justify-center rounded-3xl px-6 py-3 text-lg font-medium transition-colors"
+        className="bg-accent text-ink hover:bg-accent-bright inline-flex shrink-0 items-center justify-center rounded-3xl px-4 py-2.5 text-base font-medium transition-colors sm:px-6 sm:py-3 lg:text-lg"
       >
         Search
       </Link>
@@ -93,20 +93,24 @@ export function Hero() {
               range of courses.
             </p>
           </div>
-          <SearchBar className="w-full max-w-xl flex-col sm:flex-row sm:justify-center" />
+          <SearchBar className="w-full max-w-md sm:max-w-xl sm:justify-center" />
         </Container>
-        <div className="relative mt-10 flex h-80 items-end justify-center sm:h-105">
-          <div
+        <div className="relative mx-auto mt-8 aspect-square w-full max-w-75 sm:mt-0 sm:max-w-100 md:max-w-115">
+          <div className="absolute -bottom-1/2 md:-bottom-56 left-1/2 z-10 h-[118%] w-full -translate-x-1/2">
+            <Image
+            src="/images/hero/glow.svg"
+            alt=""
+            fill
             aria-hidden
-            className="absolute top-1/2 left-1/2 h-105 w-105 -translate-x-1/2 -translate-y-1/2 sm:h-130 sm:w-130"
-          >
-            <Image src="/images/hero/glow.svg" alt="" fill className="object-contain" />
+            className="z-0 object-contain select-none"
+          />
           </div>
-          <div className="relative h-full w-75 sm:w-100">
+          <div className="absolute bottom-0 left-1/2 z-10 h-[118%] w-[86%] -translate-x-1/2">
             <Image
               src="/images/hero/person.png"
               alt="Student learning online"
               fill
+              priority
               className="object-contain object-bottom"
             />
           </div>
@@ -165,7 +169,7 @@ export function Hero() {
             <h1
               className={cn(
                 fonts.heading.className,
-                "w-[935px] text-[72px] leading-[1.2] font-semibold tracking-[-0.72px] text-white",
+                "w-233.75 text-[72px] leading-[1.2] font-semibold tracking-[-0.72px] text-white",
               )}
             >
               Get Access to Hundreds Courses Available

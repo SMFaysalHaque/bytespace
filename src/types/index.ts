@@ -33,6 +33,11 @@ export interface Stat {
   label: string;
 }
 
+export interface AuthUser {
+  name: string;
+  email: string;
+}
+
 export interface CourseMeta {
   icon: string;
   label: string;

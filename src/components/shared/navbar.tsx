@@ -1,16 +1,66 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { authNav, mainNav } from "@/data/navigation";
+import { useAuth } from "@/features/auth/hooks/use-auth";
 import { cn } from "@/lib/utils";
 import { Container } from "./container";
 import { Logo } from "./logo";
 
+function UserMenu({ name, onLogout }: { name: string; onLogout: () => void }) {
+  const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onClick = (event: MouseEvent) => {
+      if (ref.current && !ref.current.contains(event.target as Node)) setOpen(false);
+    };
+    document.addEventListener("mousedown", onClick);
+    return () => document.removeEventListener("mousedown", onClick);
+  }, [open]);
+
+  return (
+    <div ref={ref} className="relative">
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        aria-haspopup="menu"
+        aria-expanded={open}
+        aria-label="Account menu"
+        className="bg-accent text-ink flex size-10 items-center justify-center rounded-full text-base font-medium uppercase"
+      >
+        {name.charAt(0)}
+      </button>
+      {open && (
+        <div
+          role="menu"
+          className="border-line absolute right-0 mt-3 w-48 rounded-2xl border bg-white p-2 shadow-xl"
+        >
+          <p className="text-ink truncate px-3 py-2 text-sm font-medium">{name}</p>
+          <button
+            type="button"
+            role="menuitem"
+            onClick={() => {
+              setOpen(false);
+              onLogout();
+            }}
+            className="text-ink-muted hover:bg-surface w-full rounded-lg px-3 py-2 text-left text-sm transition-colors"
+          >
+            Logout
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 export function Navbar() {
   const pathname = usePathname();
+  const { user, logout } = useAuth();
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -49,18 +99,24 @@ export function Navbar() {
         </nav>
 
         <div className="hidden items-center gap-6 md:flex">
-          <Link
-            href={authNav.login.href}
-            className="text-surface text-base transition-opacity hover:opacity-80"
-          >
-            {authNav.login.label}
-          </Link>
-          <Link
-            href={authNav.signup.href}
-            className="text-surface text-base transition-opacity hover:opacity-80"
-          >
-            {authNav.signup.label}
-          </Link>
+          {user ? (
+            <UserMenu name={user.name} onLogout={logout} />
+          ) : (
+            <>
+              <Link
+                href={authNav.login.href}
+                className="text-surface text-base transition-opacity hover:opacity-80"
+              >
+                {authNav.login.label}
+              </Link>
+              <Link
+                href={authNav.signup.href}
+                className="text-surface text-base transition-opacity hover:opacity-80"
+              >
+                {authNav.signup.label}
+              </Link>
+            </>
+          )}
           <button
             type="button"
             aria-label="View cart"
@@ -120,20 +176,38 @@ export function Navbar() {
               </Link>
             ))}
             <div className="mt-2 flex flex-col gap-1 border-t border-white/10 pt-3">
-              <Link
-                href={authNav.login.href}
-                onClick={() => setOpen(false)}
-                className="text-surface rounded-lg px-3 py-2.5 text-base transition-colors hover:bg-white/10"
-              >
-                {authNav.login.label}
-              </Link>
-              <Link
-                href={authNav.signup.href}
-                onClick={() => setOpen(false)}
-                className="text-surface rounded-lg px-3 py-2.5 text-base transition-colors hover:bg-white/10"
-              >
-                {authNav.signup.label}
-              </Link>
+              {user ? (
+                <>
+                  <p className="text-surface px-3 py-2.5 text-base font-medium">{user.name}</p>
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setOpen(false);
+                      logout();
+                    }}
+                    className="text-surface rounded-lg px-3 py-2.5 text-left text-base transition-colors hover:bg-white/10"
+                  >
+                    Logout
+                  </button>
+                </>
+              ) : (
+                <>
+                  <Link
+                    href={authNav.login.href}
+                    onClick={() => setOpen(false)}
+                    className="text-surface rounded-lg px-3 py-2.5 text-base transition-colors hover:bg-white/10"
+                  >
+                    {authNav.login.label}
+                  </Link>
+                  <Link
+                    href={authNav.signup.href}
+                    onClick={() => setOpen(false)}
+                    className="text-surface rounded-lg px-3 py-2.5 text-base transition-colors hover:bg-white/10"
+                  >
+                    {authNav.signup.label}
+                  </Link>
+                </>
+              )}
             </div>
           </Container>
         </div>
