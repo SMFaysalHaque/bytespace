@@ -101,6 +101,24 @@ From the Figma landing frame, in order:
 
 ## 5. Status — What's Done
 
+### Course Details page ✅ (branch `courseDetails`)
+
+- Route `/courses` (`src/app/courses/page.tsx`), wiring the existing navbar "Courses" link.
+- Feature `src/features/course/components/`: `course-detail-view` (layout), `course-hero`,
+  `course-video`, `course-sidebar`, `course-content` (interactive About/Lessons/Reviews
+  tabs), `course-about` (description + sneak peek + key points), `course-lessons` (modules
+  + lesson content + progress tracking), `course-reviews` (rating summary + distribution +
+  filter pills + individual review cards).
+- Content in `src/data/course-details.ts`, typed via `CourseDetail` in `src/types`.
+- Assets added under `public/images/icons` (signal, star-rate, people, share, play,
+  source, videocam, badge, consultation, videocam-module, star-filled),
+  `public/images/courses` (digital-asset-poster, sneak-peek-1..4), and
+  `public/images/reviews` (reviewer-1..4).
+- Blue hero overlaps the two-column body; overlap scales per breakpoint so the video stays
+  on blue and the tabs sit on white. All three tab panels verified responsive (xs→xxl, no
+  horizontal overflow) and tab switching confirmed.
+- Commit message: `feat: add course details page with interactive tabs and responsive layout`
+
 ### Chunk 1 — Project setup + skeleton ✅ COMPLETE
 
 - Scaffolded Next.js 16 + React 19 + TS strict + Tailwind v4, `@/*` alias.
