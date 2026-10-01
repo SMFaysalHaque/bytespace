@@ -3,6 +3,11 @@ export interface NavLink {
   href: string;
 }
 
+export interface FilterOption {
+  label: string;
+  icon: string;
+}
+
 export interface Category {
   id: string;
   name: string;

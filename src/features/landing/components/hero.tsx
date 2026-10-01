@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Container } from "@/components/shared";
 import { fonts } from "@/config/fonts";
 import { cn } from "@/lib/utils";
@@ -36,12 +37,12 @@ function SearchBar({ className }: { className?: string }) {
           className="text-ink placeholder:text-muted w-full bg-transparent text-lg outline-none"
         />
       </div>
-      <button
-        type="submit"
-        className="bg-accent text-ink hover:bg-accent-bright rounded-3xl px-6 py-3 text-lg font-medium transition-colors"
+      <Link
+        href="/search"
+        className="bg-accent text-ink hover:bg-accent-bright inline-flex items-center justify-center rounded-3xl px-6 py-3 text-lg font-medium transition-colors"
       >
         Search
-      </button>
+      </Link>
     </div>
   );
 }
