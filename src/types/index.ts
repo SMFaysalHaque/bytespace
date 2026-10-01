@@ -33,6 +33,16 @@ export interface Stat {
   label: string;
 }
 
+export interface Creator {
+  slug: string;
+  name: string;
+  role: string;
+  avatar: string;
+  badge: string;
+  bio: string[];
+  stats: Stat[];
+}
+
 export interface Testimonial {
   id: string;
   name: string;

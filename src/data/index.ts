@@ -2,6 +2,7 @@ export { mainNav, authNav } from "./navigation";
 export { categories } from "./categories";
 export { courseFilters } from "./course-filters";
 export { courses, enrolledStudents } from "./courses";
+export { creators, featuredCreator } from "./creators";
 export { growthStats } from "./stats";
 export { testimonials } from "./testimonials";
 export { partners } from "./partners";
