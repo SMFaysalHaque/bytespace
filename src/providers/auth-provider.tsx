@@ -1,7 +1,7 @@
 "use client";
 
 import { createContext, useCallback, useMemo, useSyncExternalStore, type ReactNode } from "react";
-import { AUTH_STORAGE_KEY } from "@/constants";
+import { AUTH_ACCOUNTS_KEY, AUTH_STORAGE_KEY } from "@/constants";
 import { demoCredential } from "@/data/auth";
 import type { AuthUser } from "@/types";
 
@@ -12,10 +12,16 @@ interface AuthResult {
   error?: string;
 }
 
+interface StoredAccount {
+  name: string;
+  email: string;
+  password: string;
+}
+
 interface AuthContextValue {
   user: AuthUser | null;
   login: (email: string, password: string) => AuthResult;
-  signup: (name: string, email: string) => AuthResult;
+  signup: (name: string, email: string, password: string) => AuthResult;
   logout: () => void;
 }
 
@@ -48,6 +54,25 @@ function writeStoredUser(next: AuthUser | null) {
   window.dispatchEvent(new Event(AUTH_EVENT));
 }
 
+function readAccounts(): StoredAccount[] {
+  try {
+    const raw = window.localStorage.getItem(AUTH_ACCOUNTS_KEY);
+    return raw ? (JSON.parse(raw) as StoredAccount[]) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveAccount(account: StoredAccount) {
+  try {
+    const accounts = readAccounts().filter((item) => item.email !== account.email);
+    accounts.push(account);
+    window.localStorage.setItem(AUTH_ACCOUNTS_KEY, JSON.stringify(accounts));
+  } catch {
+    return;
+  }
+}
+
 export function AuthProvider({ children }: { children: ReactNode }) {
   const stored = useSyncExternalStore(subscribe, readStoredUser, () => null);
 
@@ -61,17 +86,29 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   }, [stored]);
 
   const login = useCallback((email: string, password: string): AuthResult => {
-    const matches =
-      email.trim().toLowerCase() === demoCredential.email && password === demoCredential.password;
-    if (!matches) {
+    const normalizedEmail = email.trim().toLowerCase();
+
+    if (normalizedEmail === demoCredential.email && password === demoCredential.password) {
+      writeStoredUser({ name: demoCredential.name, email: demoCredential.email });
+      return { ok: true };
+    }
+
+    const account = readAccounts().find(
+      (item) => item.email === normalizedEmail && item.password === password,
+    );
+    if (!account) {
       return { ok: false, error: "Invalid email or password." };
     }
-    writeStoredUser({ name: demoCredential.name, email: demoCredential.email });
+
+    writeStoredUser({ name: account.name, email: account.email });
     return { ok: true };
   }, []);
 
-  const signup = useCallback((name: string, email: string): AuthResult => {
-    writeStoredUser({ name: name.trim(), email: email.trim().toLowerCase() });
+  const signup = useCallback((name: string, email: string, password: string): AuthResult => {
+    const normalizedName = name.trim();
+    const normalizedEmail = email.trim().toLowerCase();
+    saveAccount({ name: normalizedName, email: normalizedEmail, password });
+    writeStoredUser({ name: normalizedName, email: normalizedEmail });
     return { ok: true };
   }, []);
 

@@ -37,7 +37,7 @@ export function SignupForm() {
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) return;
 
-    signup(values.name, values.email);
+    signup(values.name, values.email, values.password);
     router.push("/");
   };
 

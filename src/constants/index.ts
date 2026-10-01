@@ -9,3 +9,4 @@ export const ROUTES = {
 } as const;
 
 export const AUTH_STORAGE_KEY = "bytespace.auth";
+export const AUTH_ACCOUNTS_KEY = "bytespace.accounts";
